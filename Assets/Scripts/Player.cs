@@ -1,62 +1,98 @@
-using System.Runtime.CompilerServices;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    public static Player Instance { get; private set; }
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameInput _gameInput;
+    [SerializeField] private LayerMask countersLayerMask;
 
-    private Vector3 _moveDir;
+    private Vector3 _lastInteractDirection;
     private bool _isWalking;
+    private ClearCounter _selectedCounter;
+
+    private void Awake() {
+        if (Instance != null) {
+            Debug.LogError("There is more than one Player Instance");
+        }
+        Instance = this;
+    }
+    private void Start() {
+        _gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+        if (_selectedCounter != null) {
+            _selectedCounter.Interact();
+        }
+    }
 
     void Update() {
         HandleMovement();
         HandleInteractions();
     }
-
-    private void HandleInteractions() {
-        Vector2 inputVector = _gameInput.getMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        
-        _moveDir = moveDir;
+    public bool IsWalking() {
+        return _isWalking;
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.position + transform.forward * 2f);
+    private void HandleInteractions() {
+        Vector3 moveDirection = GetMoveDirection();
+
+        if (moveDirection != Vector3.zero) {
+            _lastInteractDirection = moveDirection;
+        }
+
+        float interactDistance = 2f;
+
+        if (Physics.Raycast(transform.position, _lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Has ClearCounter
+                if (clearCounter != _selectedCounter) {
+                    SetSelectedCounter(clearCounter);
+                }
+            } else {
+                SetSelectedCounter(null);
+            }
+        } else {
+            SetSelectedCounter(null);
+        }
     }
 
     private void HandleMovement() {
-        Vector2 inputVector = _gameInput.getMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+        Vector3 moveDirection = GetMoveDirection();
 
         float moveDistance = _moveSpeed * Time.deltaTime;
         float playerRadius = .68f;
         float playerHeight = 2f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance);
 
         if (!canMove) {
             // Cannot move towards moveDir
 
             // Attempt only X movement
-            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0).normalized;
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirectionX, moveDistance);
 
             if (canMove) {
                 // Can move only on the X
-                moveDir = moveDirX;
+                moveDirection = moveDirectionX;
             } else {
                 // Cannot move only on the X
 
                 // Attempt only Z movement
-                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z).normalized;
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirectionZ, moveDistance);
 
                 if (canMove) {
                     // Can move only on the Z
-                    moveDir = moveDirZ;
+                    moveDirection = moveDirectionZ;
                 } else {
                     // Cannot move in any direction
                 }
@@ -64,16 +100,23 @@ public class Player : MonoBehaviour {
         }
 
         if (canMove) {
-            transform.position += moveDir * moveDistance;
+            transform.position += moveDirection * moveDistance;
         }
 
-        _isWalking = moveDir != Vector3.zero;
+        _isWalking = moveDirection != Vector3.zero;
 
         float moveSpeed = 10f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, moveSpeed * Time.deltaTime);
+        transform.forward = Vector3.Slerp(transform.forward, moveDirection, moveSpeed * Time.deltaTime);
+    }
+    private Vector3 GetMoveDirection() {
+        Vector2 inputVector = _gameInput.getMovementVectorNormalized();
+
+        return new Vector3(inputVector.x, 0, inputVector.y);
     }
 
-    public bool IsWalking() {
-        return _isWalking;
+    private void SetSelectedCounter(ClearCounter selectedCounter) {
+        this._selectedCounter = selectedCounter;
+
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = _selectedCounter });
     }
 }
