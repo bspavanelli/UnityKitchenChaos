@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5509996553562644390, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+      propertyPath: _counterTopPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509996553562644390, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: _kitchenObjectSO
       value: 
       objectReference: {fileID: 11400000, guid: 5c818527e70eefd42a174fc395266694, type: 2}
@@ -60,8 +64,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContainerCounter_Bread
       objectReference: {fileID: 0}
+    - target: {fileID: 8858395740671002310, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6425699082494306425, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}

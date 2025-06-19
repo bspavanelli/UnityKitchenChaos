@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5509996553562644390, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+      propertyPath: _counterTopPoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -57,7 +61,8 @@ PrefabInstance:
       value: ContainerCounter_Tomato
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6425699082494306425, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
