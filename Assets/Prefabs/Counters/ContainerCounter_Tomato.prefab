@@ -18,23 +18,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6817092449687001915, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -56,8 +56,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContainerCounter_Tomato
       objectReference: {fileID: 0}
+    - target: {fileID: 8439728551509945544, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+      propertyPath: _containerCounter
+      value: 
+      objectReference: {fileID: 7511483232743934659}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+--- !u!114 &7511483232743934659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5509996553562644390, guid: 041e69ca424eb8144aba26adeaef6d43, type: 3}
+  m_PrefabInstance: {fileID: 2614716303738082661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090a460505dddf847a5c29b472c87dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
