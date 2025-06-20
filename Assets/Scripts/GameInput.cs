@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour {
     public event EventHandler OnInteractAction;
+    public event EventHandler OnInteractAlternateAction;
 
     private PlayerInputActions _playerInput;
 
@@ -11,11 +12,16 @@ public class GameInput : MonoBehaviour {
         _playerInput.Player.Enable();
 
         _playerInput.Player.Interact.performed += Interact_performed;
+        _playerInput.Player.InteractAlternate.performed += InteractAlternate_performed;
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         // Dispara o evento apenas se ele não for null
         OnInteractAction?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void InteractAlternate_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnInteractAlternateAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 getMovementVectorNormalized() {
