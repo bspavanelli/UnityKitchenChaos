@@ -5,14 +5,14 @@ public class GameInput : MonoBehaviour {
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
 
-    private PlayerInputActions _playerInput;
+    private PlayerInputActions playerInput;
 
     private void Awake() {
-        _playerInput = new PlayerInputActions();
-        _playerInput.Player.Enable();
+        playerInput = new PlayerInputActions();
+        playerInput.Player.Enable();
 
-        _playerInput.Player.Interact.performed += Interact_performed;
-        _playerInput.Player.InteractAlternate.performed += InteractAlternate_performed;
+        playerInput.Player.Interact.performed += Interact_performed;
+        playerInput.Player.InteractAlternate.performed += InteractAlternate_performed;
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
@@ -25,7 +25,7 @@ public class GameInput : MonoBehaviour {
     }
 
     public Vector2 getMovementVectorNormalized() {
-        Vector2 inputVector = _playerInput.Player.Move.ReadValue<Vector2>();
+        Vector2 inputVector = playerInput.Player.Move.ReadValue<Vector2>();
 
         inputVector = inputVector.normalized;
 

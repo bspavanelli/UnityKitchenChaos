@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7677710bc9cdcb04fae78f333807324f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counterTopPoint: {fileID: 2973706340886438802}
+  counterTopPoint: {fileID: 2973706340886438802}
 --- !u!4 &2973706340886438802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6478767691808486299, guid: e102e40859614d344bc8cc9cf6576c3e, type: 3}

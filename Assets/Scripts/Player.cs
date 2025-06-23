@@ -10,16 +10,16 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public BaseCounter selectedCounter;
     }
 
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private GameInput _gameInput;
-    [SerializeField] private LayerMask _countersLayerMask;
-    [SerializeField] private Transform _kitchenObjectHoldPoint;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform kitchenObjectHoldPoint;
 
     private KitchenObject kitchenObject;
 
-    private Vector3 _lastInteractDirection;
-    private bool _isWalking;
-    private BaseCounter _selectedCounter;
+    private Vector3 lastInteractDirection;
+    private bool isWalking;
+    private BaseCounter selectedCounter;
 
     private void Awake() {
         if (Instance != null) {
@@ -28,19 +28,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         Instance = this;
     }
     private void Start() {
-        _gameInput.OnInteractAction += GameInput_OnInteractAction;
-        _gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
-        if (_selectedCounter != null) {
-            _selectedCounter.InteractAlternate(this);
+        if (selectedCounter != null) {
+            selectedCounter.InteractAlternate(this);
         }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-        if (_selectedCounter != null) {
-            _selectedCounter.Interact(this);
+        if (selectedCounter != null) {
+            selectedCounter.Interact(this);
         }
     }
 
@@ -49,22 +49,22 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         HandleInteractions();
     }
     public bool IsWalking() {
-        return _isWalking;
+        return isWalking;
     }
 
     private void HandleInteractions() {
         Vector3 moveDirection = GetMoveDirection();
 
         if (moveDirection != Vector3.zero) {
-            _lastInteractDirection = moveDirection;
+            lastInteractDirection = moveDirection;
         }
 
         float interactDistance = 2f;
 
-        if (Physics.Raycast(transform.position, _lastInteractDirection, out RaycastHit raycastHit, interactDistance, _countersLayerMask)) {
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
                 // Has ClearCounter
-                if (baseCounter != _selectedCounter) {
+                if (baseCounter != selectedCounter) {
                     SetSelectedCounter(baseCounter);
                 }
             } else {
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void HandleMovement() {
         Vector3 moveDirection = GetMoveDirection();
 
-        float moveDistance = _moveSpeed * Time.deltaTime;
+        float moveDistance = this.moveSpeed * Time.deltaTime;
         float playerRadius = .68f;
         float playerHeight = 2f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance);
@@ -113,25 +113,25 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
             transform.position += moveDirection * moveDistance;
         }
 
-        _isWalking = moveDirection != Vector3.zero;
+        isWalking = moveDirection != Vector3.zero;
 
         float moveSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, moveSpeed * Time.deltaTime);
     }
     private Vector3 GetMoveDirection() {
-        Vector2 inputVector = _gameInput.getMovementVectorNormalized();
+        Vector2 inputVector = gameInput.getMovementVectorNormalized();
 
         return new Vector3(inputVector.x, 0, inputVector.y);
     }
 
     private void SetSelectedCounter(BaseCounter baseCounter) {
-        this._selectedCounter = baseCounter;
+        this.selectedCounter = baseCounter;
 
-        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = _selectedCounter });
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounter });
     }
 
     public Transform GetKitchenObjectFollowTransform() {
-        return _kitchenObjectHoldPoint;
+        return kitchenObjectHoldPoint;
     }
 
     public void SetKitchenObject(KitchenObject kitchenObject) {

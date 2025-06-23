@@ -335,9 +335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e99f76defcf464890d37b68eae624e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoveOnGameObject: {fileID: 2814354378246275456}
-  _particlesGameObject: {fileID: 8016950226425583113}
-  _stoveCounter: {fileID: 4238118539402387415}
+  stoveOnGameObject: {fileID: 2814354378246275456}
+  particlesGameObject: {fileID: 8016950226425583113}
+  stoveCounter: {fileID: 4238118539402387415}
 --- !u!4 &1128801504789113107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4589716710238282923, guid: 93af8b85a17635f40a5b76ed82a86c18, type: 3}
@@ -441,10 +441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8717a4ad59e1a4b42aff73818f87490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counterTopPoint: {fileID: 2159604216018722292}
-  _fryingRecipeSOArray:
+  counterTopPoint: {fileID: 2159604216018722292}
+  fryingRecipeSOArray:
   - {fileID: 11400000, guid: 6b45994fe4a736e468bf7167f368581e, type: 2}
-  _burningRecipeSOArray:
+  burningRecipeSOArray:
   - {fileID: 11400000, guid: 4acc95bdc5365fb48bb6c17eaa40426d, type: 2}
 --- !u!4 &2159604216018722292 stripped
 Transform:

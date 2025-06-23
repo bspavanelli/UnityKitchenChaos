@@ -3,25 +3,25 @@ using UnityEngine.UI;
 
 public class ProgressBarUI : MonoBehaviour {
     [SerializeField] private GameObject hasProgressGameObject;
-    [SerializeField] private Image _barImage;
+    [SerializeField] private Image barImage;
 
-    private IHasProgress _hasProgress;
+    private IHasProgress hasProgress;
 
     private void Start() {
-        _hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
-        if (_hasProgress == null) {
+        hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
+        if (hasProgress == null) {
             Debug.LogError("Game Object " + hasProgressGameObject + " does not have a component that implements IHasProgress!");
         }
 
-        _hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
+        hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
 
-        _barImage.fillAmount = 0f;
+        barImage.fillAmount = 0f;
 
         Hide();
     }
 
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e) {
-        _barImage.fillAmount = e.progressNormalized;
+        barImage.fillAmount = e.progressNormalized;
         if (e.progressNormalized == 0f || e.progressNormalized == 1f) {
             Hide();
         } else {

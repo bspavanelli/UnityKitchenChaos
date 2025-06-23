@@ -326,8 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faad16724bbc18f4aae0dd616e5bd710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counterTopPoint: {fileID: 8262665835939544256}
-  _cuttingRecipeSOArray:
+  counterTopPoint: {fileID: 8262665835939544256}
+  cuttingRecipeSOArray:
   - {fileID: 11400000, guid: 18a1dc1c4226c8e48a38543d9f250548, type: 2}
   - {fileID: 11400000, guid: 96ad68affdfbac642b87b1c656bb3955, type: 2}
   - {fileID: 11400000, guid: 638da043a9ec0df4d8d785b9213eb3d9, type: 2}
@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: hasProgressGameObject
       value: 
       objectReference: {fileID: 8801733526966667285}
+    - target: {fileID: 2810233106411846715, guid: 88316f419ae9b2342bf23f5aad7d993e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3235288280838324645, guid: 88316f419ae9b2342bf23f5aad7d993e, type: 3}
       propertyPath: m_Name
       value: ProgressBarUI
