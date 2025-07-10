@@ -174,12 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: c842dbaaeec6f5e448b5897cf9a8f6f0, type: 2}
-  validKitchenObjectSOList:
-  - {fileID: 11400000, guid: 5c818527e70eefd42a174fc395266694, type: 2}
-  - {fileID: 11400000, guid: a9b35e71d5b263547b9c783533727338, type: 2}
-  - {fileID: 11400000, guid: 99049c7b5d686b845ad64e41b38c1d70, type: 2}
-  - {fileID: 11400000, guid: 5f3f02ebbf43fdb45a472ff41f7f1039, type: 2}
-  - {fileID: 11400000, guid: 2ef67d7eb1c21484a93c3a4c3a5d13d5, type: 2}
+  validKitchenObjectSOList: {fileID: 11400000, guid: c18171ed0324d804f8e18472400d6af4, type: 2}
 --- !u!1 &6187156799854718336
 GameObject:
   m_ObjectHideFlags: 0

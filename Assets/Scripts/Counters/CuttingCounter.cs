@@ -1,5 +1,4 @@
 using System;
-using Mono.Cecil;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter, IHasProgress {

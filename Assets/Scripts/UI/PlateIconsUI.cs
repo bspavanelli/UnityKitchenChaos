@@ -1,15 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlateIconsUI : MonoBehaviour {
+public class PlateIconsUI : MonoBehaviour, IInitializable {
     [SerializeField] private PlateKitchenObject plateKitchenObject;
     [SerializeField] private Transform iconTemplate;
+    
+    public void Initialize() {
+        plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
+    }
 
     private void Awake() {
         iconTemplate.gameObject.SetActive(false);
-    }
-
-    private void Start() {
-        plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
     }
 
     private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngredientAddedEventArgs e) {
@@ -28,4 +29,5 @@ public class PlateIconsUI : MonoBehaviour {
             iconTransform.GetComponent<PlateIconsSingleUI>().SetKitchenObjectSO(kitchenObjectSO);
         }
     }
+
 }

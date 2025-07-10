@@ -11,7 +11,7 @@ public class PlateKitchenObject : KitchenObject {
         public KitchenObjectSO kitchenObjectSO;
     }
 
-    [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
+    [SerializeField] private ValidKitchenObjectsInPlateListSO validKitchenObjectSOList;
 
     private List<KitchenObjectSO> kitchenObjectSOList;
 
@@ -20,7 +20,7 @@ public class PlateKitchenObject : KitchenObject {
     }
 
     public bool TryAddIngredient(KitchenObjectSO kitchenObjectSO) {
-        if (!validKitchenObjectSOList.Contains(kitchenObjectSO)) {
+        if (!validKitchenObjectSOList.validKitchenObjectsInPlateList.Contains(kitchenObjectSO)) {
             // Not a valid ingredient
             return false;
         }
@@ -29,7 +29,6 @@ public class PlateKitchenObject : KitchenObject {
             return false;
         } else {
             kitchenObjectSOList.Add(kitchenObjectSO);
-            
             OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs {
                 kitchenObjectSO = kitchenObjectSO
             });

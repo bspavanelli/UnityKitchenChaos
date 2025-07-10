@@ -1,10 +1,18 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using static PlateCompleteVisual;
 
 public class KitchenObject : MonoBehaviour {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     private IKitchenObjectParent kitchenObjectParent;
+
+    public void Initialize() {
+        foreach (var init in GetComponentsInChildren<IInitializable>()) {
+            init.Initialize();
+        }
+    }
 
     public KitchenObjectSO GetKitchenObjectSO() {
         return kitchenObjectSO;
@@ -46,9 +54,18 @@ public class KitchenObject : MonoBehaviour {
         }
     }
 
+    public PlateKitchenObject GetPlateKitchenObject() {
+        if (this is PlateKitchenObject) {
+            return this as PlateKitchenObject;
+        } else {
+            return null;
+        }
+    }
+
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
         Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
         KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+        kitchenObject.Initialize();
 
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 
