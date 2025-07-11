@@ -8,6 +8,9 @@ public class PlateCompleteVisual : MonoBehaviour, IInitializable {
         public KitchenObjectSO kitchenObjectSO;
         public GameObject gameObject;
     }
+
+    [SerializeField] private PlateKitchenObject plateKitchenObject;
+    [SerializeField] private List<KitchenObjectSO_GameObject> kitchenObjectSOGameObjectList;
     public void Initialize() {
         plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
 
@@ -15,9 +18,6 @@ public class PlateCompleteVisual : MonoBehaviour, IInitializable {
             kitchenObjectSOGameObject.gameObject.SetActive(false);
         }
     }
-
-    [SerializeField] private PlateKitchenObject plateKitchenObject;
-    [SerializeField] private List<KitchenObjectSO_GameObject> kitchenObjectSOGameObjectList;
 
     private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngredientAddedEventArgs e) {
 

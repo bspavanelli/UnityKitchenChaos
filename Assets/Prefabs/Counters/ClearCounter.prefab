@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 1236949200425166180}
   kitchenObjectSO: {fileID: 0}
+  plateKitchenObjectSO: {fileID: 11400000, guid: c842dbaaeec6f5e448b5897cf9a8f6f0, type: 2}
+  validKitchenObjectSOList: {fileID: 11400000, guid: c18171ed0324d804f8e18472400d6af4, type: 2}
 --- !u!4 &3845788442333788313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9051477048200375910, guid: e102e40859614d344bc8cc9cf6576c3e, type: 3}

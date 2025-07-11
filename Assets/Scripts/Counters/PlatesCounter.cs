@@ -43,7 +43,7 @@ public class PlatesCounter : BaseCounter {
             }
         } else {
             // Player has something in hand
-            if (CanObjectInHandBePlacedInPlate(player.GetKitchenObject().GetKitchenObjectSO())) {
+            if (CanKitchenObjectBePlacedInPlate(player.GetKitchenObject().GetKitchenObjectSO())) {
                 // Object in hand can be placed in plate
                 if (platesSpawnedAmount > 0) {
                     // There´s at least one plate here
@@ -59,8 +59,19 @@ public class PlatesCounter : BaseCounter {
 
                     PlateKitchenObject playerPlateKitchenObject = player.GetKitchenObject().GetPlateKitchenObject();
                     // Adicionar o objeto que estava na mão antes, no prato
-                    //StartCoroutine(AddIngredient(playerPlateKitchenObject, oldPlayerKitchenObjectInHand));
                     playerPlateKitchenObject.TryAddIngredient(oldPlayerKitchenObjectInHand);
+                }
+            } else {
+                PlateKitchenObject playerPlateKitchenObject = player.GetKitchenObject().GetPlateKitchenObject();
+                if (playerPlateKitchenObject != null && !playerPlateKitchenObject.HasPlate()) {
+                    if (platesSpawnedAmount > 0) {
+                        // There´s at least one plate here
+                        platesSpawnedAmount--;
+
+                        playerPlateKitchenObject.SetHasPlate(true);
+
+                        OnPlateRemoved?.Invoke(this, new EventArgs());
+                    }
                 }
             }
         }
@@ -71,9 +82,9 @@ public class PlatesCounter : BaseCounter {
         plateKitchenObject.TryAddIngredient(kitchenObjectSO);
     }
 
-    private bool CanObjectInHandBePlacedInPlate(KitchenObjectSO kitchenObjectInPlayerHands) {
+    private bool CanKitchenObjectBePlacedInPlate(KitchenObjectSO kitchenObjecSOToVerify) {
         foreach (KitchenObjectSO kitchenObjectSO in validKitchenObjectsInPlateListSO.validKitchenObjectsInPlateList) {
-            if (kitchenObjectSO == kitchenObjectInPlayerHands) {
+            if (kitchenObjectSO == kitchenObjecSOToVerify) {
                 return true;
             }
         }
